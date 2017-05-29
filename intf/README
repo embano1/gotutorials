@@ -1,0 +1,2 @@
+Little app to show the usage of interfaces.  
+Observe how we receive an unexported struct (uncomment the corresponding line in main.go).

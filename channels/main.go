@@ -31,8 +31,6 @@ func writer(c <-chan pwch, done chan bool) {
 			done <- true
 		}
 	}
-
-	// fmt.Printf("Go routine %d generated number %f", c.)
 }
 
 func main() {
