@@ -1,0 +1,1 @@
+run: eval "$(./my-app --completion-script-zsh)"

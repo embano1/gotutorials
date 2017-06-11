@@ -1,0 +1,4 @@
+#GO CLI example
+
+Inspired by https://developer.atlassian.com/blog/2016/03/building-helpful-golang-cli-tools/  
+Based on: https://github.com/alecthomas/kingpin
