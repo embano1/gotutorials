@@ -8,6 +8,8 @@ spec:
   - image: embano1/env:1.0
     imagePullPolicy: Always
     name: env
+    command: ["/env"]
+    args: ["-stack", "$(STACK)"]
     resources: {}
     resources:
       limits:
@@ -22,6 +24,6 @@ spec:
             resource: limits.memory
       - name: STACK
       # ordinary env setting
-        value: "12m"
+        value: "128mb"
   dnsPolicy: ClusterFirst
   restartPolicy: OnFailure
