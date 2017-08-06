@@ -44,7 +44,7 @@ func main() {
 				fmt.Println("main.go: Sleeping for", sleep, "seconds")
 				time.Sleep(time.Duration(sleep) * time.Second)
 			case <-ctx.Done():
-				fmt.Println("main.go: We ware told to stop")
+				fmt.Println("main.go: We were told to stop")
 				wg.Done()
 				break LOOP
 			}

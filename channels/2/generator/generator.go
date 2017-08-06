@@ -24,7 +24,6 @@ func New(ctx context.Context) (<-chan int, <-chan struct{}) {
 func generate(ctx context.Context, c chan<- int, done chan<- struct{}) {
 	defer close(done)
 
-LOOP:
 	for {
 		i := rand.Intn(100)
 
@@ -33,7 +32,7 @@ LOOP:
 			fmt.Println("Sent", i)
 		case <-ctx.Done():
 			fmt.Println("generator.go: We were told to stop")
-			break LOOP
+			return
 		default:
 			fmt.Println("generator.go: Blocked, throwing away", i, "and throttling")
 			time.Sleep(time.Second)
