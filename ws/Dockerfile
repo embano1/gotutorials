@@ -1,5 +1,5 @@
 FROM scratch
-MAINTAINER embano1@live.com
+LABEL MAINTAINER embano1@live.com
 ADD www /www
 ADD ws /ws
 ENV PORT 40000
