@@ -5,9 +5,9 @@ This test requires a working Docker environment with at least 2 cpus for the Doc
 Compare the output (`time "real"`) of the following runs:
 
 ```sh
-docker run --rm -it concprime # should be the fastest compared to next runs if your Docker host has >1 cpus
-docker run --cpus 1 --rm -it concprime # will be slower, obviously
-docker run --cpus 1 --rm -e GOMAXPROCS=1 -it concprime # should be faster than previous run (GOMAXPROCS == --cpus), because of runtime hinting
+docker run --rm -it embano1/concprime # should be the fastest compared to next runs if your Docker host has >1 cpus
+docker run --cpus 1 --rm -it embano1/concprime # will be slower, obviously
+docker run --cpus 1 --rm -e GOMAXPROCS=1 -it embano1/concprime # should be faster than previous run (GOMAXPROCS == --cpus), because of runtime hinting
 ```
 
 If you have more cpus for your Docker host, play with the `--cpus` and `GOMAXPROCS` flags. It will suprise you :)  
@@ -50,6 +50,6 @@ The Go runtime, like many other languages, do not yet have full cgroup support. 
 git clone https://github.com/embano1/gotutorials/
 cd gotutorials/concprime
 export COMMIT=$(git rev-parse --short --always HEAD)
-#change Docker tag ("concprime:$COMMIT") as needed
-docker build -t concprime:$COMMIT --build-arg COMMIT=$COMMIT . 
+#change Docker tag ("embano1/concprime:$COMMIT") as needed
+docker build -t embano1/concprime:$COMMIT --build-arg COMMIT=$COMMIT . 
 ```
