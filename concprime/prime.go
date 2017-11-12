@@ -1,7 +1,9 @@
 // A concurrent prime sieve
 // Based on https://play.golang.org/p/9U22NfrXeq
 
-package prime
+package concprime
+
+import "fmt"
 
 // Send the sequence 2, 3, 4, ... to channel 'ch'.
 func generate(ch chan<- int) {
@@ -21,13 +23,15 @@ func filter(in <-chan int, out chan<- int, prime int) {
 	}
 }
 
-// FindPrimes searches and blocks for primes up to the given number n
-func FindPrimes(n int) {
+// Find searches for n primes. This call blocks.
+func Find(n int, print bool) {
 	ch := make(chan int) // Create a new channel.
 	go generate(ch)      // Launch Generate goroutine.
 	for i := 0; i < n; i++ {
 		prime := <-ch
-		// fmt.Println(prime, "\n")
+		if print {
+			fmt.Println(prime)
+		}
 		ch1 := make(chan int)
 		go filter(ch, ch1, prime)
 		ch = ch1
