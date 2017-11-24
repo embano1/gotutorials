@@ -1,4 +1,3 @@
 Dockerfile
 *.MD
-cmd
 trace*
