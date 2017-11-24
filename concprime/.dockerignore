@@ -1,2 +1,4 @@
 Dockerfile
 *.MD
+cmd
+trace*
