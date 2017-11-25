@@ -12,7 +12,7 @@ import (
 func main() {
 
 	n := flag.Int("n", 10, "Find first n primes")
-	t := flag.Bool("t", false, "Enable tracing to STDOUT (default false)")
+	t := flag.Bool("t", false, "Enable tracing to file specified with -f (default false)")
 	tf := flag.String("f", "trace.out", "Name of trace output file")
 	print := flag.Bool("p", false, "Print primes (default false)")
 	flag.Parse()
