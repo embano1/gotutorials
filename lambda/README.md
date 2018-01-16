@@ -9,11 +9,11 @@ Follow [this tutorial](https://aws.amazon.com/blogs/compute/announcing-go-suppor
 ## Build function
 ```bash
 $ git clone https://github.com/embano1/gotutorials/
-$ cd lambda
+$ cd gotutorials/lambda
 $ sh build.sh
 ```
 
-Then upload `lambda.zip`.
+Then upload `lambda.zip` as your code entry type (using .zip).
 
 # Query AWS API Gateway endpoint
 ```bash
