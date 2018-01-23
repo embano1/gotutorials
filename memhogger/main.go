@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"runtime"
+	"sync"
 	"time"
 )
 
@@ -24,22 +25,26 @@ func main() {
 	flag.Parse()
 
 	var m memhogger
+	var wg sync.WaitGroup
 
 	// Burn a CPU
 	if *burn {
+		wg.Add(1)
 		go func() {
 			for {
 				// Yield to gosched
 				time.Sleep(time.Microsecond)
 			}
 		}()
+		wg.Done()
 	}
 
-	fmt.Printf("Tuning go runtime for %d GOMAXPROCS\n", runtime.GOMAXPROCS(0))
+	fmt.Printf("Go runtime running with %d GOMAXPROCS\n", runtime.GOMAXPROCS(0))
 	fmt.Printf("Eating %d MB of your tasty memory (chunk delay: %v)...\n", growby**(iter), *delay)
 	fmt.Printf("CPU Burning enabled: %v\n", *burn)
 
 	// Eat memory
+	wg.Add(1)
 	go func() {
 		for i := 0; i < *iter; i++ {
 			leak := make([]byte, growby*1024*1024, growby*1024*1024)
@@ -50,6 +55,7 @@ func main() {
 			m.leaks = append(m.leaks, leak)
 			time.Sleep(*delay)
 		}
+		wg.Done()
 	}()
 
 	// TODO: implement http.mux with API for
@@ -61,5 +67,6 @@ func main() {
 	// https://github.com/kubernetes-up-and-running/kuard/blob/1fe8f0528424f7aaaebeff93213089e6e1c5ca57/pkg/memory/api.go#L59:21
 
 	// TODO: remove with http.listenandserve()
-	select {}
+	wg.Wait()
+	fmt.Println("Done")
 }
