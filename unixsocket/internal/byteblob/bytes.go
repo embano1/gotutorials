@@ -29,14 +29,20 @@ func New(size int) ([]byte, error) {
 	return b, nil
 }
 
-// Receive starts reading from the specified connection. It takes a context (for cancellation) and waitgroup (clean shutdown). Buffer size used for reading is configurable.
+// Receive starts reading from the specified connection. 
+// It takes a context (for cancellation) and waitgroup (clean shutdown). Buffer size used for reading is configurable.
+// Upon returning it closes conn.
 func Receive(ctx context.Context, wg *sync.WaitGroup, conn net.Conn, bufSize int) {
-	defer wg.Done()
+	defer func() {
+		conn.Close()
+		wg.Done()
+	}()
+
 	b := make([]byte, bufSize)
 	var read int
 	d := time.Now()
 	for {
-		select {
+		select {	
 		case <-ctx.Done():
 			log.Println("got cancelled")
 			return

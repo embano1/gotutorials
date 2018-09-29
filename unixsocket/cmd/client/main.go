@@ -1,7 +1,8 @@
 package main
 
 import (
-	"embano1/bytes/internal/byteblob"
+	"github.com/embano1/gotutorials/unixsocket/internal/byteblob"
+
 	"flag"
 	"log"
 	"net"

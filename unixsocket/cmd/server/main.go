@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"embano1/bytes/internal/byteblob"
 	"flag"
 	"log"
 	"net"
@@ -10,6 +9,8 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+
+	"github.com/embano1/gotutorials/unixsocket/internal/byteblob"
 )
 
 var socket string
